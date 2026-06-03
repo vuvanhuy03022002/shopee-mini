@@ -13,7 +13,8 @@ app.use(cors())
 app.use(express.json())
 
 // 🔥 CONNECT MONGODB
-mongoose.connect('mongodb://127.0.0.1:27017/vueshop')
+  require('dotenv').config()
+  mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err))
 
@@ -94,6 +95,8 @@ app.get('/api/order/:id', async (req, res) => {
 })
 
 // ================= START SERVER =================
-app.listen(3000, () => {
-  console.log('Server Running on http://localhost:3000')
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
+  console.log('Server Running on http://localhost:' + PORT)
 })
