@@ -3,7 +3,7 @@
 
     <header class="header">
 
-      <div class="logo">
+      <div class="logo" @click="goHome">
         🛍 HuyShop
       </div>
 
@@ -41,24 +41,7 @@
 
     </header>
 
-    <section class="banner">
-
-      <div class="slide" v-if="current === 0">
-        <h1>🔥 FLASH SALE 50%</h1>
-        <p>Giảm giá công nghệ hôm nay</p>
-      </div>
-
-      <div class="slide" v-if="current === 1">
-        <h1>📱 iPhone Deal Hot</h1>
-        <p>Số lượng giới hạn</p>
-      </div>
-
-      <div class="slide" v-if="current === 2">
-        <h1>💻 Laptop Gaming</h1>
-        <p>Hiệu năng mạnh - giá tốt</p>
-      </div>
-
-    </section>
+    <HeroSlider />
 
     <section class="categories">
 
@@ -84,7 +67,7 @@
 
     </section>
 
-    <h2 class="title">
+    <h2 class="title" id="products"> 
       Sản phẩm nổi bật
     </h2>
 
@@ -129,43 +112,48 @@
   </div>
   <section class="about">
 
-  <h2>✨ Về HuyShop</h2>
+    <h2>✨ Về HuyShop</h2>
 
-  <p>
-    HuyShop là nền tảng mua sắm công nghệ hiện đại, mang đến trải nghiệm
-    nhanh, mượt và tiện lợi cho người dùng.
-  </p>
+    <p>
+      HuyShop là nền tảng mua sắm công nghệ hiện đại, mang đến trải nghiệm
+      nhanh, mượt và tiện lợi cho người dùng.
+    </p>
 
-  <div class="features">
+    <div class="features">
 
-    <div class="feature">
-      🚀 <h3>Giao hàng nhanh</h3>
-      <p>Giao hàng toàn quốc chỉ từ 1–3 ngày</p>
+      <div class="feature">
+        🚀 <h3>Giao hàng nhanh</h3>
+        <p>Giao hàng toàn quốc chỉ từ 1–3 ngày</p>
+      </div>
+
+      <div class="feature">
+        🔒 <h3>Thanh toán an toàn</h3>
+        <p>Hỗ trợ COD và chuyển khoản bảo mật</p>
+      </div>
+
+      <div class="feature">
+        📱 <h3>Sản phẩm chính hãng</h3>
+        <p>Cam kết 100% hàng chất lượng cao</p>
+      </div>
+
+      <div class="feature">
+        💬 <h3>Hỗ trợ 24/7</h3>
+        <p>Luôn sẵn sàng hỗ trợ khách hàng</p>
+      </div>
+
     </div>
 
-    <div class="feature">
-      🔒 <h3>Thanh toán an toàn</h3>
-      <p>Hỗ trợ COD và chuyển khoản bảo mật</p>
-    </div>
-
-    <div class="feature">
-      📱 <h3>Sản phẩm chính hãng</h3>
-      <p>Cam kết 100% hàng chất lượng cao</p>
-    </div>
-
-    <div class="feature">
-      💬 <h3>Hỗ trợ 24/7</h3>
-      <p>Luôn sẵn sàng hỗ trợ khách hàng</p>
-    </div>
-
-  </div>
-
-</section>
+  </section>
+  <Footer />
 </template>
 
 <script>
 import productsData from '../data/products'
+import { useRouter } from 'vue-router'
+import HeroSlider from '../components/HeroSlider.vue'
+import Footer from '../components/Footer.vue' 
 export default {
+  components: { HeroSlider, Footer },
   data() {
     return {
       user: null,
@@ -242,6 +230,15 @@ export default {
 
       return result
     }
+  },
+  setup() {
+    const router = useRouter()
+
+    const goHome = () => {
+      router.push('/')
+    }
+
+    return { goHome }
   }
 }
 
